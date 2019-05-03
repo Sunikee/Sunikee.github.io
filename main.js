@@ -30,7 +30,7 @@ webpackEmptyAsyncContext.id = "./src/$$_lazy_route_resource lazy recursive";
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!--The content below is only a placeholder and can be replaced.-->\n<div class=\"container-fluid\">\n  <div class=\"row mt-3\">\n    <div class=\"col-1\"></div>\n    <div class=\"col-5\">\n      <app-initiative-controls></app-initiative-controls>\n    </div>\n    <div class=\"col-5\">\n      <app-initiative-tracker></app-initiative-tracker>\n    </div>\n    <div class=\"col-1\"></div>\n  </div>\n</div>"
+module.exports = "<!--The content below is only a placeholder and can be replaced.-->\r\n<div class=\"container-fluid\">\r\n  <div class=\"row mt-3\">\r\n    <div class=\"col\"></div>\r\n    <div class=\"col-12\">\r\n      <div class=\"navbar navbar-dark bg-dark\">\r\n        <span class=\"navbar-brand\">\r\n          Initiative Tracker\r\n        </span>\r\n      </div>\r\n    </div>\r\n    <div class=\"col\"></div>\r\n  </div>\r\n  <div class=\"row mt-3\">\r\n    <div class=\"col-1\"></div>\r\n    <div class=\"col-5\">\r\n      <app-initiative-controls></app-initiative-controls>\r\n    </div>\r\n    <div class=\"col-5\">\r\n      <app-initiative-tracker></app-initiative-tracker>\r\n    </div>\r\n    <div class=\"col-1\"></div>\r\n  </div>\r\n</div>"
 
 /***/ }),
 
@@ -153,7 +153,7 @@ var CharacterTypes;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n  <button class=\"col btn btn-primary btn mr-2\" (click)=\"next()\">Next</button>\n  <button class=\"col btn btn-secondary btn mr-2\" (click)=\"last()\">Last</button>\n  <button class=\"col btn btn-danger btn\" (click)=\"clear()\">Clear</button>\n</div>\n<div class=\"row mt-3\">\n  <div class=\"col\">\n    <div class=\"input-group\">\n      <input type=\"text\" aria-label=\"name\" placeholder=\"name\" class=\"form-control\" [(ngModel)]=\"name\">\n      <input type=\"text\" aria-label=\"initiative\" placeholder=\"Initiative\" class=\"form-control\" [(ngModel)]=\"initiative\">\n      <select class=\"custom-select\" [(ngModel)]=\"type\">\n        <option *ngFor=\"let type of types()\" [ngValue]=\"type\">{{type}}</option>\n      </select>\n      <div class=\"input-group-append\">\n        <button class=\"btn btn-outline-secondary\" type=\"button\" id=\"button-addon2\" (click)=\"add()\">Add</button>\n      </div>\n    </div>\n  </div>\n</div>"
+module.exports = "<div class=\"row\">\r\n  <button class=\"col btn btn-primary btn mr-2\" (click)=\"next()\">Next</button>\r\n  <button class=\"col btn btn-secondary btn mr-2\" (click)=\"last()\">Last</button>\r\n  <button class=\"col btn btn-danger btn\" (click)=\"clear()\">Clear</button>\r\n</div>\r\n<div class=\"row mt-3\">\r\n  <div class=\"col\">\r\n    <form class=\"input-group\" #f=\"ngForm\" (ngSubmit)=\"add(f)\">\r\n      <input type=\"text\" aria-label=\"name\" name=\"name\" placeholder=\"Name\" class=\"form-control\" ngModel>\r\n      <input type=\"text\" name=\"initiative\" placeholder=\"Initiative\" class=\"form-control\" ngModel>\r\n      <select class=\"custom-select\" ngModel name=\"type\">\r\n        <option *ngFor=\"let type of types()\" [ngValue]=\"type\">{{type}}</option>\r\n      </select>\r\n      <div class=\"input-group-append\">\r\n        <button class=\"btn btn-outline-secondary\" id=\"button-addon2\">Add</button>\r\n      </div>\r\n    </form>\r\n  </div>\r\n</div>\r\n<div class=\"row mt-3\">\r\n  <div class=\"col\">\r\n    Presets\r\n    <form class=\"input-group\" #f=\"ngForm\" (ngSubmit)=\"addPreset(f)\">\r\n      <input type=\"text\" aria-label=\"name\" name=\"name\" placeholder=\"Name\" class=\"form-control\" ngModel>\r\n      <select class=\"custom-select\" ngModel name=\"type\">\r\n        <option *ngFor=\"let type of types()\" [ngValue]=\"type\">{{type}}</option>\r\n      </select>\r\n      <div class=\"input-group-append\">\r\n        <button class=\"btn btn-outline-secondary\" id=\"button-addon2\">Add</button>\r\n      </div>\r\n    </form>\r\n    <form class=\"input-group mt-1\" #f=\"ngForm\" (ngSubmit)=\"add(f)\" *ngFor=\"let character of characterPresets\">\r\n      <input type=\"text\" name=\"name\" class=\"form-control\" [(ngModel)]=\"character.name\" readonly>\r\n      <input type=\"text\" name=\"type\" class=\"form-control\" [(ngModel)]=\"character.type\" readonly>\r\n      <input type=\"text\" name=\"initiative\" placeholder=\"Initiative\" class=\"form-control\" ngModel>      \r\n      <div class=\"input-group-append\">\r\n        <button class=\"btn btn-outline-secondary\" id=\"button-addon2\">Add</button>\r\n        <button class=\"btn btn-outline-secondary\" type=\"button\" (click)=\"removePreset(character)\">Remove</button>\r\n      </div>\r\n    </form>\r\n  </div>\r\n</div>"
 
 /***/ }),
 
@@ -183,19 +183,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_intitiative_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/intitiative.service */ "./src/app/services/intitiative.service.ts");
 /* harmony import */ var _enums_character_types_enum__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../enums/character-types.enum */ "./src/app/enums/character-types.enum.ts");
 /* harmony import */ var _models_initiative__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../models/initiative */ "./src/app/models/initiative.ts");
+/* harmony import */ var _models_character_preset__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../models/character-preset */ "./src/app/models/character-preset.ts");
+/* harmony import */ var _services_character_preset_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../services/character-preset.service */ "./src/app/services/character-preset.service.ts");
+
+
 
 
 
 
 
 var InitiativeControlsComponent = /** @class */ (function () {
-    function InitiativeControlsComponent(initiativeService) {
+    function InitiativeControlsComponent(initiativeService, characterPresetService) {
         this.initiativeService = initiativeService;
+        this.characterPresetService = characterPresetService;
         this.name = "";
         this.initiative = 0;
         this.type = _enums_character_types_enum__WEBPACK_IMPORTED_MODULE_3__["CharacterTypes"].Player;
     }
     InitiativeControlsComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.characterPresetService.get().subscribe(function (v) {
+            _this.characterPresets = v;
+        });
     };
     InitiativeControlsComponent.prototype.next = function () {
         this.initiativeService.nextInitiative();
@@ -206,12 +215,21 @@ var InitiativeControlsComponent = /** @class */ (function () {
     InitiativeControlsComponent.prototype.clear = function () {
         this.initiativeService.clear();
     };
-    InitiativeControlsComponent.prototype.add = function () {
+    InitiativeControlsComponent.prototype.add = function (f) {
         var initiative = new _models_initiative__WEBPACK_IMPORTED_MODULE_4__["Initiative"]();
-        initiative.name = this.name;
-        initiative.initiative = this.initiative;
-        initiative.type = this.type;
+        initiative.name = f.value.name;
+        initiative.initiative = Number(f.value.initiative);
+        initiative.type = f.value.type;
         this.initiativeService.addInitiative(initiative);
+    };
+    InitiativeControlsComponent.prototype.addPreset = function (f) {
+        var character = new _models_character_preset__WEBPACK_IMPORTED_MODULE_5__["CharacterPreset"]();
+        character.name = f.value.name;
+        character.type = f.value.type;
+        this.characterPresetService.add(character);
+    };
+    InitiativeControlsComponent.prototype.removePreset = function (character) {
+        this.characterPresetService.remove(character);
     };
     InitiativeControlsComponent.prototype.types = function () {
         return Object.keys(_enums_character_types_enum__WEBPACK_IMPORTED_MODULE_3__["CharacterTypes"]);
@@ -222,7 +240,7 @@ var InitiativeControlsComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./initiative-controls.component.html */ "./src/app/initiative-controls/initiative-controls.component.html"),
             styles: [__webpack_require__(/*! ./initiative-controls.component.sass */ "./src/app/initiative-controls/initiative-controls.component.sass")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_intitiative_service__WEBPACK_IMPORTED_MODULE_2__["IntitiativeService"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_intitiative_service__WEBPACK_IMPORTED_MODULE_2__["IntitiativeService"], _services_character_preset_service__WEBPACK_IMPORTED_MODULE_6__["CharacterPresetService"]])
     ], InitiativeControlsComponent);
     return InitiativeControlsComponent;
 }());
@@ -238,7 +256,7 @@ var InitiativeControlsComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-fluid\" *ngFor=\"let intiative of initiatives\">\n  <div *ngIf=\"isPlayer(intiative.type)\" class=\"alert alert-primary\"><span>{{intiative.name}}</span><span class=\"float-right\">{{intiative.initiative}}</span></div>\n  <div *ngIf=\"isEnemy(intiative.type)\" class=\"alert alert-danger\"><span>{{intiative.name}}</span><span class=\"float-right\">{{intiative.initiative}}</span></div>\n  <div *ngIf=\"isNpc(intiative.type)\" class=\"alert alert-info\"><span>{{intiative.name}}</span><span class=\"float-right\">{{intiative.initiative}}</span></div>\n</div>"
+module.exports = "<div class=\"container-fluid\" *ngFor=\"let intiative of initiatives\">\r\n  <div *ngIf=\"isPlayer(intiative.type)\" class=\"alert alert-primary alert-dismissible\">\r\n    <span>{{intiative.name}}</span>    \r\n    <button type=\"button\" class=\"close float-right ml-5\" (click)=\"remove(intiative)\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>\r\n    <span class=\"float-right\">{{intiative.initiative}}</span>\r\n  </div>\r\n  <div *ngIf=\"isEnemy(intiative.type)\" class=\"alert alert-danger alert-dismissible\">\r\n    <span>{{intiative.name}}</span>\r\n    <button type=\"button\" class=\"close float-right ml-5\" (click)=\"remove(intiative)\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>\r\n    <span class=\"float-right\">{{intiative.initiative}}</span>\r\n  </div>\r\n  <div *ngIf=\"isNpc(intiative.type)\" class=\"alert alert-info alert-dismissible\">\r\n    <span>{{intiative.name}}</span>\r\n    <button type=\"button\" class=\"close float-right ml-5\" (click)=\"remove(intiative)\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>\r\n    <span class=\"float-right\">{{intiative.initiative}}</span>\r\n  </div>\r\n</div>"
 
 /***/ }),
 
@@ -282,6 +300,7 @@ var InitiativeTrackerComponent = /** @class */ (function () {
         test.subscribe(function (result) {
             _this.initiatives = result;
         });
+        this.initiativeService.addInitiative({ name: 'Steve', initiative: 10, type: _enums_character_types_enum__WEBPACK_IMPORTED_MODULE_2__["CharacterTypes"].Player });
     };
     InitiativeTrackerComponent.prototype.isPlayer = function (type) {
         return type == _enums_character_types_enum__WEBPACK_IMPORTED_MODULE_2__["CharacterTypes"].Player;
@@ -292,6 +311,9 @@ var InitiativeTrackerComponent = /** @class */ (function () {
     InitiativeTrackerComponent.prototype.isNpc = function (type) {
         return type == _enums_character_types_enum__WEBPACK_IMPORTED_MODULE_2__["CharacterTypes"].Npc;
     };
+    InitiativeTrackerComponent.prototype.remove = function (initiative) {
+        this.initiativeService.remove(initiative);
+    };
     InitiativeTrackerComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-initiative-tracker',
@@ -301,6 +323,26 @@ var InitiativeTrackerComponent = /** @class */ (function () {
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_intitiative_service__WEBPACK_IMPORTED_MODULE_3__["IntitiativeService"]])
     ], InitiativeTrackerComponent);
     return InitiativeTrackerComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/models/character-preset.ts":
+/*!********************************************!*\
+  !*** ./src/app/models/character-preset.ts ***!
+  \********************************************/
+/*! exports provided: CharacterPreset */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CharacterPreset", function() { return CharacterPreset; });
+var CharacterPreset = /** @class */ (function () {
+    function CharacterPreset() {
+    }
+    return CharacterPreset;
 }());
 
 
@@ -321,6 +363,53 @@ var Initiative = /** @class */ (function () {
     function Initiative() {
     }
     return Initiative;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/services/character-preset.service.ts":
+/*!******************************************************!*\
+  !*** ./src/app/services/character-preset.service.ts ***!
+  \******************************************************/
+/*! exports provided: CharacterPresetService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CharacterPresetService", function() { return CharacterPresetService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+
+
+
+var CharacterPresetService = /** @class */ (function () {
+    function CharacterPresetService() {
+        this.characterPresets = [];
+        this.characterPresets = JSON.parse(localStorage.getItem('presets'));
+    }
+    CharacterPresetService.prototype.get = function () {
+        return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])(this.characterPresets);
+    };
+    CharacterPresetService.prototype.add = function (character) {
+        this.characterPresets.push(character);
+        localStorage.setItem('presets', JSON.stringify(this.characterPresets));
+        console.log(JSON.stringify(this.characterPresets));
+    };
+    CharacterPresetService.prototype.remove = function (character) {
+        var index = this.characterPresets.indexOf(character);
+        this.characterPresets.splice(index, 1);
+        localStorage.setItem('presets', JSON.stringify(this.characterPresets));
+    };
+    CharacterPresetService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+            providedIn: 'root'
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+    ], CharacterPresetService);
+    return CharacterPresetService;
 }());
 
 
@@ -370,6 +459,10 @@ var IntitiativeService = /** @class */ (function () {
         temp.forEach(function (v) {
             _this.initiatives.push(v);
         });
+    };
+    IntitiativeService.prototype.remove = function (initiative) {
+        var index = this.initiatives.indexOf(initiative);
+        this.initiatives.splice(index, 1);
     };
     IntitiativeService.prototype.sort = function () {
         this.initiatives.sort(function (a, b) {
@@ -460,7 +553,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! D:\GitProjects\InitiativeKeeper\src\main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! C:\Projects\GitHub\InitiativeKeeper\src\main.ts */"./src/main.ts");
 
 
 /***/ })
