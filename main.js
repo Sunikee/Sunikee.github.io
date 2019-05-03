@@ -300,7 +300,6 @@ var InitiativeTrackerComponent = /** @class */ (function () {
         test.subscribe(function (result) {
             _this.initiatives = result;
         });
-        this.initiativeService.addInitiative({ name: 'Steve', initiative: 10, type: _enums_character_types_enum__WEBPACK_IMPORTED_MODULE_2__["CharacterTypes"].Player });
     };
     InitiativeTrackerComponent.prototype.isPlayer = function (type) {
         return type == _enums_character_types_enum__WEBPACK_IMPORTED_MODULE_2__["CharacterTypes"].Player;
